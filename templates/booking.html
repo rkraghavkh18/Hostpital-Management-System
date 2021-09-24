@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Booking
+{% endblock title %}
+
+
+{% block body %}
+
+{% with messages=get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    
+    <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+        {{message}}
+    
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    
+    
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">Pid</th>
+      <th scope="col">Email</th>
+      <th scope="col">Name</th>
+      <th scope="col">Gender</th>
+      <th scope="col">Slot</th>
+      <th scope="col">Disease</th>
+      <th scope="col">Time</th>
+      <th scope="col">Date</th>
+      <th scope="col">Department</th>
+      <th scope="col">PhoneNo.</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for post in query %}
+    <tr>
+      <th scope="row">{{post.pid}}</th>
+      <td>{{post.email}}</td>
+      <td>{{post.name}}</td>
+      <td>{{post.gender}}</td>
+      <td>{{post.slot}}</td>
+      <td>{{post.disase}}</td>
+      <td>{{post.date}}</td>
+      <td>{{post.time}}</td>
+      <td>{{post.dept}}</td>
+      <td>{{post.number}}</td>
+      <td><a href="/edit/{{post.pid}}"><button class="btn btn-primary">Edit </button> </a> </td>
+    <td><a href="/delete/{{post.pid}}"><button onclick="return confirm('Are you sure to Delete data');" class="btn btn-danger">Delete </button> </a> </td>
+    </tr>
+{% endfor %}
+    
+  </tbody>
+</table>
+{% endblock body %}
